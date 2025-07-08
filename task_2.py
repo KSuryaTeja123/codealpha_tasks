@@ -14,8 +14,20 @@ knowledge_base = {
     "how can i return a product?": "You can return a product within 30 days of purchase.",
     "how to track my order?": "You can track your order using the tracking link sent to your email.",
     "do you ship internationally?": "Yes, we offer international shipping to selected countries.",
-    "what payment methods are available?": "We accept debit cards, credit cards, UPI, and digital wallets."
+    "what payment methods are available?": "We accept debit cards, credit cards, UPI, and digital wallets.",
+    "how long does delivery take?": "Standard delivery takes 3-5 business days.",
+    "can I cancel my order?": "Yes, you can cancel your order within 24 hours of placing it.",
+    "how will I get my refund?": "Refunds will be credited to your original payment method within 7 days.",
+    "do you offer cash on delivery?": "Currently, we do not support cash on delivery.",
+    "how do I change my shipping address?": "Please contact our support team to update your shipping address.",
+    "is there a warranty on products?": "Yes, most products come with a 1-year manufacturer warranty.",
+    "what if I received a damaged item?": "If you received a damaged item, please contact support with a photo within 48 hours.",
+    "how do I contact customer support?": "You can contact our support via chat or email at support@example.com.",
+    "can I exchange a product?": "Yes, exchanges are possible for size or color issues within 15 days.",
+    "is my personal information safe?": "Yes, we follow strict data protection and encryption standards.",
+    "how to apply a discount code?": "You can apply the discount code during checkout in the promo code field."
 }
+
 
 # 🎯 Preprocess Text
 def clean_text(text):
