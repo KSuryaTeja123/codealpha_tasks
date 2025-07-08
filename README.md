@@ -102,7 +102,6 @@ This is a simple command-line FAQ Chatbot built using Python. It uses *NLTK* for
 - NLTK
 - Scikit-learn
 
-
 # Task 3
 <h1>🎵 Music Generator with AI</h1>
 
