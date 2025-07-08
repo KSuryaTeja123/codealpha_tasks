@@ -7,25 +7,29 @@ import random
 import time
 import threading
 
-nltk.download('punkt')
+nltk.download("punkt")
 
 # 🎯 Knowledge Base
 knowledge_base = {
-    "how can i return a product?": "You can return a product within 30 days of purchase.",
-    "how to track my order?": "You can track your order using the tracking link sent to your email.",
-    "do you ship internationally?": "Yes, we offer international shipping to selected countries.",
-    "what payment methods are available?": "We accept debit cards, credit cards, UPI, and digital wallets.",
-    "how long does delivery take?": "Standard delivery takes 3-5 business days.",
-    "can I cancel my order?": "Yes, you can cancel your order within 24 hours of placing it.",
-    "how will I get my refund?": "Refunds will be credited to your original payment method within 7 days.",
-    "do you offer cash on delivery?": "Currently, we do not support cash on delivery.",
-    "how do I change my shipping address?": "Please contact our support team to update your shipping address.",
-    "is there a warranty on products?": "Yes, most products come with a 1-year manufacturer warranty.",
-    "what if I received a damaged item?": "If you received a damaged item, please contact support with a photo within 48 hours.",
-    "how do I contact customer support?": "You can contact our support via chat or email at support@example.com.",
-    "can I exchange a product?": "Yes, exchanges are possible for size or color issues within 15 days.",
-    "is my personal information safe?": "Yes, we follow strict data protection and encryption standards.",
-    "how to apply a discount code?": "You can apply the discount code during checkout in the promo code field."
+    "how can i return a product?": "No worries! You can return a product within 30 days of purchase. Just head over to your account and initiate the return from the 'My Orders' section.",
+    "how to track my order?": "You can easily track your order using the tracking link sent to your email. Still can't find it? Let us know, and we'll help you out!",
+    "do you ship internationally?": "Yes, we do! We offer international shipping to selected countries. You’ll see shipping options at checkout based on your location.",
+    "what payment methods are available?": "We accept debit cards, credit cards, UPI, and digital wallets like Google Pay and PhonePe. Quick and secure!",
+    "how long does delivery take?": "Standard delivery takes 3–5 business days, while express delivery gets it to you in just 1–2 days. We work hard to get your goodies to you fast!",
+    "can i cancel my order?": "Absolutely. You can cancel your order within 12 hours of placing it. Just go to 'My Orders' and hit 'Cancel'.",
+    "what if i received a damaged product?": "Oh no! If your product arrives damaged, please contact our support team within 48 hours. We’ll sort it out ASAP.",
+    "do you offer cash on delivery?": "Yes! Cash on delivery is available for orders under ₹5,000. Great for quick and secure purchases.",
+    "how do i apply a discount code?": "Got a coupon? Awesome! Just enter your discount code during checkout in the 'Apply Coupon' section to get your savings.",
+    "how do i contact customer support?": "We’re here for you! Reach us anytime via the 'Contact Us' page or call 1800-123-456. We typically respond within 24 hours.",
+    "can i change my shipping address after ordering?": "Yes, you can—but only within 1 hour of placing your order. Head to 'My Orders' and click 'Edit Address'.",
+    "are your products under warranty?": "Yes, every product comes with a minimum 6-month manufacturer warranty. Check the product page for details.",
+    "do you offer gift wrapping?": "Sure thing! Gift wrapping is available during checkout for a small extra charge. Perfect for birthdays and special occasions!",
+    "where can i find my invoice?": "You can find and download your invoice from the 'My Orders' section in your account. Need help? Just ask!",
+    "do you have a mobile app?": "Yes, we do! Download our app from the Google Play Store or Apple App Store for a smoother shopping experience.",
+    "can i save items for later?": "Of course! Just click the heart icon next to a product to add it to your wishlist. You can view it anytime from your account.",
+    "do you offer any student discounts?": "Yes! We offer exclusive discounts for students. Just verify your student status during checkout to unlock them.",
+    "is there a first-time buyer discount?": "Welcome aboard! First-time buyers get 10% off. Use code FIRST10 at checkout to claim your discount.",
+    "can i reorder a previous purchase?": "Definitely! Go to 'My Orders' and click 'Reorder' next to any past purchase. Easy and quick!",
 }
 
 
@@ -33,9 +37,10 @@ knowledge_base = {
 def clean_text(text):
     return text.lower().strip()
 
+
 # 🎯 Chatbot Engine
 class SupportBot:
-    def __init__(self, knowledge):
+    def _init_(self, knowledge):
         self.questions = list(knowledge.keys())
         self.answers = list(knowledge.values())
         self.cleaned_questions = [clean_text(q) for q in self.questions]
@@ -53,37 +58,53 @@ class SupportBot:
 
         return self.answers[best_match_index]
 
+
 # 🎯 GUI App
 class ChatBotApp:
-    def __init__(self, master):
+    def _init_(self, master):
         self.bot = SupportBot(knowledge_base)
         self.master = master
-        self.master.title("Smart ChatBot")
+        self.master.title("ChatBot")
         self.master.geometry("500x500")
         self.master.resizable(False, False)
+        self.master.configure(bg="#6A0DAD")  # Purple background
 
-        self.chat_area = scrolledtext.ScrolledText(master, wrap=tk.WORD, state='disabled', font=("Arial", 12))
-        self.chat_area.place(x=20, y=20, width=460, height=400)
+        # Heading
+        self.heading = tk.Label(
+            master, text="ChatBot", font=("Arial", 20, "bold"), bg="#6A0DAD", fg="white"
+        )
+        self.heading.place(x=0, y=0, width=500, height=40)
 
-        self.user_input = tk.Entry(master, font=("Arial", 14))
+        self.chat_area = scrolledtext.ScrolledText(
+            master, wrap=tk.WORD, state="disabled", font=("Arial", 12), bg="#E6E6FA"
+        )
+        self.chat_area.place(x=20, y=50, width=460, height=370)
+
+        self.user_input = tk.Entry(master, font=("Arial", 14), bg="white")
         self.user_input.place(x=20, y=440, width=360, height=30)
         self.user_input.bind("<Return>", self.handle_enter)
 
-        self.send_button = tk.Button(master, text="Send", font=("Arial", 12), command=self.send_message)
+        self.send_button = tk.Button(
+            master,
+            text="Send",
+            font=("Arial", 12),
+            bg="white",
+            command=self.send_message,
+        )
         self.send_button.place(x=400, y=440, width=80, height=30)
 
         self.add_bot_message("Hello! I can help you. Type 'exit' to leave.")
 
     def add_bot_message(self, message):
-        self.chat_area['state'] = 'normal'
+        self.chat_area["state"] = "normal"
         self.chat_area.insert(tk.END, f"Bot: {message}\n")
-        self.chat_area['state'] = 'disabled'
+        self.chat_area["state"] = "disabled"
         self.chat_area.see(tk.END)
 
     def add_user_message(self, message):
-        self.chat_area['state'] = 'normal'
+        self.chat_area["state"] = "normal"
         self.chat_area.insert(tk.END, f"You: {message}\n")
-        self.chat_area['state'] = 'disabled'
+        self.chat_area["state"] = "disabled"
         self.chat_area.see(tk.END)
 
     def send_message(self):
@@ -94,7 +115,7 @@ class ChatBotApp:
         self.add_user_message(user_text)
         self.user_input.delete(0, tk.END)
 
-        if user_text.lower() == 'exit':
+        if user_text.lower() == "exit":
             self.add_bot_message("Goodbye! Have a nice day.")
             self.master.after(1000, self.master.quit)
             return
@@ -108,8 +129,9 @@ class ChatBotApp:
         reply = self.bot.get_answer(user_text)
         self.add_bot_message(reply)
 
+
 # 🎯 Run the GUI
-if __name__ == "__main__":
+if _name_ == "_main_":
     window = tk.Tk()
     app = ChatBotApp(window)
     window.mainloop()
