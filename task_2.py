@@ -40,7 +40,7 @@ def clean_text(text):
 
 # 🎯 Chatbot Engine
 class SupportBot:
-    def _init_(self, knowledge):
+    def __init__(self, knowledge):
         self.questions = list(knowledge.keys())
         self.answers = list(knowledge.values())
         self.cleaned_questions = [clean_text(q) for q in self.questions]
@@ -61,7 +61,7 @@ class SupportBot:
 
 # 🎯 GUI App
 class ChatBotApp:
-    def _init_(self, master):
+    def __init__(self, master):
         self.bot = SupportBot(knowledge_base)
         self.master = master
         self.master.title("ChatBot")
@@ -131,7 +131,7 @@ class ChatBotApp:
 
 
 # 🎯 Run the GUI
-if _name_ == "_main_":
+if __name__ == "__main__":
     window = tk.Tk()
     app = ChatBotApp(window)
     window.mainloop()
